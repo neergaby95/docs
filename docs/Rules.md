@@ -1504,6 +1504,30 @@ Rule3
 ```haskell
 Backlog Rule1 1; Rule2 1; Rule3 1
 ```
+//Command over MQTT 
+```haskell
+cmnd/sonoff_device/EVENT
+```
+//Home assistant cover exemple
+```haskell
+cover:
+
+- platform: mqtt
+  name: "Garage Door"
+  command_topic: "cmnd/sonoff_device/EVENT"
+  state_topic: "stat/sonoff_device/STATE"
+  availability_topic: "tele/sonoff_device/LWT"
+  qos: 0
+  retain: false   #make sure this is false - otherwise command may be sent on restart of MQTT
+  payload_open: "OPEN"
+  payload_close: "CLOSE"
+  payload_stop: "STOP"
+  state_open: "OPEN"
+  state_closed: "CLOSE"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  device_class: garage
+```
 
 ------------------------------------------------------------------------------
 
